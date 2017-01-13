@@ -1,0 +1,64 @@
+﻿@model Services.Models.Article
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="container">
+
+ <ol class="breadcrumb">
+    <li><a href='@Url.Action("Index", "Home")'>Articles</a></li>
+    <li class="active">Delete</li>
+ </ol>
+
+<h3>Are you sure you want to delete this?</h3>
+
+<form class="form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(model => model.name, new { @class = "control-label col-md-2" })
+        <span class="form-control-static col-md-10">@Html.DisplayFor(model => model.name)</span>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.description, new { @class = "control-label col-md-2" })
+        <span class="form-control-static col-md-10">@Html.DisplayFor(model => model.description)</span>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.price, new { @class = "control-label col-md-2" })
+        <span class="form-control-static col-md-10">@String.Format("{0:c}", Model.price)</span>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.total_in_shelf, new { @class = "control-label col-md-2" })
+        <span class="form-control-static col-md-10">@Html.DisplayFor(model => model.total_in_shelf)</span>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.total_in_vault, new { @class = "control-label col-md-2" })
+        <span class="form-control-static col-md-10">@Html.DisplayFor(model => model.total_in_vault)</span>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Store.name, new { @class = "control-label col-md-2" })
+        <span class="form-control-static col-md-10">@Html.DisplayFor(model => model.Store.name)</span>
+    </div>
+</form>
+
+  @using (Html.BeginForm("Delete", "Home", 
+    new { ReturnUrl = ViewBag.ReturnUrl }, 
+    FormMethod.Post, new { @class="form-horizontal" })){
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+        <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Index", "Home")'">
+            <span class="glyphicon glyphicon-chevron-left"></span> Back to List
+        </button>
+        <button type="submit" class="btn btn-danger" value="Delete">
+            <span class="glyphicon glyphicon-remove"></span> Delete
+        </button>
+        </div>
+    </div>
+}
+
+</div>

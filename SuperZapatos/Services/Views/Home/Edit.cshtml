@@ -1,0 +1,87 @@
+﻿@model Services.Controllers.ArticleViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="container">
+
+ <ol class="breadcrumb">
+    <li><a href='@Url.Action("Index", "Home")'>Articles</a></li>
+    <li class="active">Edit</li>
+ </ol>
+
+  @using (Html.BeginForm("Edit", "Home", 
+    new { ReturnUrl = ViewBag.ReturnUrl }, 
+    FormMethod.Post, new { @class="form-horizontal" })){
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(model => model.article.id)
+    @Html.HiddenFor(model => model.SelectedStoreId, "PreviousStoreId")
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.article.name, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.article.name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.article.name)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.article.description, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.article.description, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.article.description)
+        </div>
+    </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.article.price,  new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.article.price, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.article.price)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.article.total_in_shelf,  new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.article.total_in_shelf, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.article.total_in_shelf)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.article.total_in_vault,  new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.article.total_in_vault, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.article.total_in_vault)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.SelectedStoreId, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.SelectedStoreId, Model.Stores, "- Select one -", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SelectedStoreId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Index", "Home")'">
+                    <span class="glyphicon glyphicon-chevron-left"></span> Back to List
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-floppy-disk"></span> Save
+                </button>
+            </div>
+        </div>
+}
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
